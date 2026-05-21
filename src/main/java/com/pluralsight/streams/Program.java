@@ -1,13 +1,16 @@
-package com.pluralsight.loops;
+package com.pluralsight.streams;
 
 import com.pluralsight.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Program {
 
     public static void main(String[] args) {
+            Scanner input = new Scanner(System.in);
         List<Person> persons = new ArrayList<>();
 
         persons.add(new Person("lovi", "tesfay", 24));
@@ -21,30 +24,21 @@ public class Program {
         persons.add(new Person("christiano", "ronaldo", 19));
         persons.add(new Person("messi", "buzy", 10));
 
-     //   System.out.println("Search for a name (first or last): ");
-      //  String searchName = sc.nextLine();
+        System.out.println("Search: ");
+        String search = input.nextLine();
 
-        // List<Person> matchedPeople = new ArrayList<Person>();
+        List<Person> matches = persons.stream().filter(person -> person.getFirstName().equalsIgnoreCase(search)).toList();
+        System.out.println("Matches: " + matches);
 
 
-        //  for (Person person : persons) {
 
-        //    if (person.getFirstName().toLowerCase().contains(searchName.toLowerCase())) {
-        //    matchedPeople.add(person);
-        //  }
-        //  }
+        //get the total age
+        int totalAge = persons.stream()
+                .mapToInt(person -> person.getAge())
+                .sum();
+        //print out the total age
+        System.out.println("the total age is " + totalAge);
 
-        //    for (Person person : matchedPeople) {
-        //     System.out.println(person.getFirstName() + " " + person.getLastName());
-        //  }
 
-        // adding all ages and displaying them
-            int sum = 0;
-        for (Person person : persons) {
-             sum += person.getAge();
-
-        }
-        System.out.println(sum);
     }
 }
-
